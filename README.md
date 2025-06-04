@@ -5,7 +5,7 @@ This project simulates a simple DDoS test on a local server using Python. Built 
 
 ## ⚙️ Setup
 ```bash
-git clone https://github.com/YOUR_USERNAME/DDoS-Lab-Termux.git
+git clone (https://github.com/Mrglitchoffical/Ddos_Lab-1.git)
 cd DDoS-Lab-Termux
 pip install -r requirements.txt
 ```
