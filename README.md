@@ -5,9 +5,14 @@ This project simulates a simple DDoS test on a local server using Python. Built 
 
 ## ⚙️ Setup
 ```bash
-git clone https://github.com/Mrglitchoffical/Ddos_Lab-1.git```
-```cd Ddos_Lab-1 ```
-``` pip install -r requirements.txt ```
+git clone https://github.com/Mrglitchoffical/Ddos_Lab-1.git
+```
+```bash 
+cd Ddos_Lab-1
+```
+```bash
+pip install -r requirements.txt
+```
 
 
 ## 🖥️ Run the Server
