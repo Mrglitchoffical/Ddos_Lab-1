@@ -18,6 +18,8 @@ pip install -r requirements.txt
 ## 🖥️ Run the Server
 ```bash
 cd server
+```
+```bash
 python server.py
 ```
 
@@ -25,6 +27,8 @@ python server.py
 Open another Termux session:
 ```bash
 cd DDoS-Lab-Termux/attack
+```
+```bash
 python attack.py
 ```
 
