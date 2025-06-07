@@ -1,4 +1,8 @@
-import threading, requests, random, string, time
+import threading
+import requests
+import random
+import string
+import ime
 
 TARGET_URL = "http://yourpanel.com"  # 👈 Tumhara panel URL ya IP
 THREADS = 1000                       # Heavy threads
