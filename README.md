@@ -1,4 +1,4 @@
-# DDoS-Lab-Termux (Educational Purpose Only)
+# DDoS-Lab-Trial
 
 ## 💡 About
 This project simulates a simple DDoS test on a local server using Python. Built to run entirely on Android Termux.
@@ -26,13 +26,10 @@ python server.py
 ## 💣 Run the DDoS Simulation
 Open another Termux session:
 ```bash
-cd DDoS-Lab-Termux/attack
+cd Ddos_Lab-1/attack
 ```
 ```bash
 python attack.py
 ```
 
-⚠️ Use only on your own machine. Never attack external servers!
-
-## 🛡️ License
-MIT
+⚠️ Use only on your own machine. Never attack external servers
